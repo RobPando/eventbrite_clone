@@ -41,7 +41,7 @@ RSpec.configure do |config|
 
   config.around(:each) do |example|
     DatabaseCleaner.cleaning do 
-      example.com
+      example.run
     end
   end
 
