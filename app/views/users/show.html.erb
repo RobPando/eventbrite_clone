@@ -1,2 +1,16 @@
 <% provide(:title, @user.name.capitalize) %>
 <h1><%= @user.name.capitalize %>'s Profile</h1>
+<h2><%= link_to "Create a New Event", new_event_path %></h2>
+
+<h1>My Events</h1>
+<% if @user.created_events.any? %>
+  <ul>
+  <% @user.creates_events.each do |event| %>
+    <li>
+      <%= link_to event.name, event_path(event) %>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+  
+

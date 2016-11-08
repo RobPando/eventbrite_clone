@@ -1,0 +1,11 @@
+<h1>My Invitations</h1>
+
+<% if current_user.events.any? %>
+  <ul>
+    <% current_user.events.each do |invite| %>
+      <li>
+        <%= link_to "#{invites.name}", event_path(invite) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

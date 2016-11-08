@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:show]
 
   def new
     @user = User.new
@@ -7,6 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      log_in @user
       flash[:success] = "You have successfully signed up!"
       redirect_to @user
     else
@@ -15,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id])
+    @user = User.find(params[:id])
   end
 
   private

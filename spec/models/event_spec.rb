@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it "validates the presence of name" do
+  end
+
+  it "validates the presence of description" do
+  end
+  
+  it "validates the presence of location" do
+  end
 end

@@ -17,4 +17,10 @@ module SessionsHelper
     @current_user = nil
   end
 
+  private
+
+  def logged_in_user
+    redirect_to root_url unless logged_in?
+  end
+
 end
