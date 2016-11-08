@@ -1,10 +1,20 @@
+<% provide(:title, "Event") %>
+<h1>Event Name: <%= @event.name %></h1>
 
-<h1>Event</h1>
-
-<h2>Creator: <%= current_user.name %></h2>
+<h2>Creator: <%= @event.creator.name.capitalize %></h2>
 <h3>Desciption</h3>
-<p></p>
+<p><%= @event.description %></p>
 <h3>Location</h3>
-<p></p>
+<p><%= @event.location %></p>
 <h3>Date</h3>
-<p></p>
+<p><%= @event.date %></p>
+<h3>Guests</h3>
+<% if @guests.any? %>
+  <ul>
+    <% @guests.each do |guest| %>
+    <li><%= guest.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No guests</p>
+<% end %>

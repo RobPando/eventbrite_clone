@@ -3,6 +3,8 @@
 <h1>Create a New Event</h1>
 <p>
   <%= form_for(@event) do |f| %>
+    <%= f.submit "Create Event" %>
+
     <%= f.label :name %>
     <%= f.text_field :name %></br>
 
@@ -14,7 +16,10 @@
 
     <%= f.label :date %>
     <%= f.date_field :date %></br>
-
-    <%= f.submit "Create Event" %>
+    <h3>Invite</h3>
+    <% @users.each do |user| %>
+    <%= f.label :guests, user.name unless user == current_user %>
+    <%= f.check_box :guests unless user == current_user %>
+    <% end %>
   <% end %>
 </p>
