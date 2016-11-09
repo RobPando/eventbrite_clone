@@ -13,6 +13,7 @@ class EventsController < ApplicationController
   def create
     @event = current_user.created_events.build(event_params)
     if @event.save
+      @guests = Event.find(@event.id).guests
       redirect_to @event
       flash[:success] = "Event was created successfully"
     else

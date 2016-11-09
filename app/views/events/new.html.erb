@@ -18,8 +18,10 @@
     <%= f.date_field :date %></br>
     <h3>Invite</h3>
     <% @users.each do |user| %>
-    <%= f.label :guests, user.name unless user == current_user %>
-    <%= f.check_box :guests unless user == current_user %>
+      <% unless user == current_user %>
+        <%= f.label :guests, user.name %>
+        <%= f.check_box :guests %>
+      <% end %>
     <% end %>
   <% end %>
 </p>
