@@ -13,18 +13,10 @@
 
       <%= f.label :location %>
       <%= f.text_field :location %></br>
-
-<<<<<<< HEAD
-    <%= f.label :date %>
-    <%= f.date_field :date %></br>
-    <h3>Invite</h3>
-    <% @users.each do |user| %>
-      <% unless user == current_user %>
-        <%= f.label :guests, user.name %>
-        <%= f.check_box :guests %>
-=======
+      
       <%= f.label :date %>
       <%= f.date_field :date %></br>
+
       <%= f.fields_for(:invitations) do |invite| %>
         <% @users.each do |user| %>
           <% unless current_user == user %>
@@ -32,7 +24,6 @@
           <%= check_box_tag "user_id[]", user.id %></br>
           <% end %>
         <% end %>
->>>>>>> invite-guests
       <% end %>
     <% end %>
 </p>

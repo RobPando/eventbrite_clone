@@ -14,12 +14,8 @@ class EventsController < ApplicationController
   def create
     @event = current_user.created_events.build(event_params)
     if @event.save
-<<<<<<< HEAD
-      @guests = Event.find(@event.id).guests
-=======
       @invites = Event.find(@event.id)
       params[:user_id].each { |id| @invites.invitations.create(user_id: id) }
->>>>>>> invite-guests
       redirect_to @event
       flash[:success] = "Event was created successfully"
     else

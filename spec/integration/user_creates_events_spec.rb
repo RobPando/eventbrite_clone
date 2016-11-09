@@ -13,7 +13,6 @@ RSpec.describe "User/Event management", type: :request do
     expect(response).to render_template(:new)
   end
 
-<<<<<<< HEAD
   it "creates a new event" do
     post events_path, params: { event: { name: "Some", 
                                          description: "Party",
@@ -22,7 +21,6 @@ RSpec.describe "User/Event management", type: :request do
     expect(response).to redirect_to(event_path(1))
   end
 
-=======
   it "submits the wrong info" do
     post events_path, params: { event: { name: " ",
                                          description: "asd",
@@ -36,7 +34,7 @@ RSpec.describe "User/Event management", type: :request do
                                          location: "ma house" } }
     expect(response).to redirect_to(event_path(1))
   end
->>>>>>> invite-guests
+
 
 end
 
@@ -56,7 +54,6 @@ RSpec.feature "Create Event", type: :feature do
     fill_in "Name", with: "Bday"
     fill_in "Description", with: "ma bday"
     fill_in "Location", with: "ma house"
-    check "guests"
     click_button "Create Event"
 
     expect(page).to have_content(@user.name)
