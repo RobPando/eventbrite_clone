@@ -6,23 +6,25 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = current_user.created_events.build
+    @event = Event.new
+    @event.invitations.build
     @users = User.all
   end
 
   def create
     @event = current_user.created_events.build(event_params)
     if @event.save
+      @invites = Event.find(@event.id)
+      params[:user_id].each { |id| @invites.invitations.create(user_id: id) }
       redirect_to @event
       flash[:success] = "Event was created successfully"
     else
-      render 'new'
+      redirect_to new_event_path
     end
   end
 
   def show
     @event = Event.find_by(id: params[:id])
-    @guests = @event.guests
   end
 
   def edit

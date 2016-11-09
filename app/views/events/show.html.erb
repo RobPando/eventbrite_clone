@@ -9,9 +9,9 @@
 <h3>Date</h3>
 <p><%= @event.date %></p>
 <h3>Guests</h3>
-<% if @guests.any? %>
+<% if @event.guests.any? %>
   <ul>
-    <% @guests.each do |guest| %>
+    <% @event.guests.each do |guest| %>
     <li><%= guest.name %></li>
     <% end %>
   </ul>

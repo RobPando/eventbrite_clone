@@ -1,25 +1,28 @@
 <% provide(:title, "New Event") %>
 
 <h1>Create a New Event</h1>
-<p>
-  <%= form_for(@event) do |f| %>
-    <%= f.submit "Create Event" %>
+<p> 
+    <%= form_for(@event) do |f| %>
+      <%= submit_tag "Create Event" %></br>
 
-    <%= f.label :name %>
-    <%= f.text_field :name %></br>
+      <%= f.label :name %>
+      <%= f.text_field :name %></br>
 
-    <%= f.label :description %>
-    <%= f.text_area :description %></br>
+      <%= f.label :description %>
+      <%= f.text_field :description %></br>
 
-    <%= f.label :location %>
-    <%= f.text_field :location %></br>
+      <%= f.label :location %>
+      <%= f.text_field :location %></br>
 
-    <%= f.label :date %>
-    <%= f.date_field :date %></br>
-    <h3>Invite</h3>
-    <% @users.each do |user| %>
-    <%= f.label :guests, user.name unless user == current_user %>
-    <%= f.check_box :guests unless user == current_user %>
+      <%= f.label :date %>
+      <%= f.date_field :date %></br>
+      <%= f.fields_for(:invitations) do |invite| %>
+        <% @users.each do |user| %>
+          <% unless current_user == user %>
+          <%= label_tag "user_id[]", "#{user.name}" %>
+          <%= check_box_tag "user_id[]", user.id %></br>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
 </p>
