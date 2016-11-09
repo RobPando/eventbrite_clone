@@ -1,0 +1,8 @@
+<%= form_for(@guests) do |f| %>
+<% @users.each do |user| %>
+  <% unless user == current_user %>
+  <%= f.label :guest_name, user.name %>
+  <%= f.radio_button(:guest_id, user.id) %>
+  <% end %>
+  <%= f.submit "Invite" %>
+<% end %>
