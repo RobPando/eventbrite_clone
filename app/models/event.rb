@@ -9,4 +9,12 @@ class Event < ApplicationRecord
   validates :location, presence: true
   validates :creator, presence: true
 
+  def Event.upcoming_events
+    self.where("date >= ?", Time.zone.now)
+  end
+
+  def Event.past_events
+    self.where("date < ?", Time.zone.now)
+  end
+
 end
