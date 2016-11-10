@@ -10,4 +10,7 @@ RSpec.describe Event, type: :model do
   
   it "validates the presence of location" do
   end
+
+  it "validates the presence of date" do
+  end
 end

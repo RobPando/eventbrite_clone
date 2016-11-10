@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "User/Event management", type: :request do
+RSpec.describe "User/Event management" do
   
   before :each do
     @user = create(:user)
@@ -42,7 +42,7 @@ RSpec.feature "Create Event", type: :feature do
 
   before :each do
     @user = create(:user)
-    another_user = create(:user)
+    @another_user = create(:user)
     visit login_path
     fill_in "Email", with: @user.email
     fill_in "Password", with: @user.password
@@ -54,10 +54,22 @@ RSpec.feature "Create Event", type: :feature do
     fill_in "Name", with: "Bday"
     fill_in "Description", with: "ma bday"
     fill_in "Location", with: "ma house"
+    check "#{@another_user.name}"
     click_button "Create Event"
 
     expect(page).to have_content(@user.name)
     expect(page).to have_content("Bday")
+  end
+
+  it "allows user to invite other users" do
+    visit new_event_path
+    fill_in "Name", with: "Bday"
+    fill_in "Description", with: "ma bday"
+    fill_in "Location", with: "ma house"
+    check "#{@another_user.name}"
+    click_button "Create Event"
+
     expect(page).to have_content(@another_user.name)
   end
+
 end
