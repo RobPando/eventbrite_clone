@@ -4,7 +4,10 @@
 <%= link_to "Delete Event", event_path, method: "delete", date: { confirm: "Are you sure?"} %>
 <p> 
     <%= form_for(@event) do |f| %>
-      <%= submit_tag "Update Event" %></br>
+
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.submit "Update Event" %></br>
 
       <%= f.label :name %></br>
       <%= f.text_field :name %></br>
@@ -21,7 +24,7 @@
       <h2>Invite:</h2>
       <%= f.fields_for(:invitations) do |invite| %>
         <% @users.each do |user| %>
-          <% unless current_user == user || @event.guests.include?(invite) %>
+          <% unless current_user == user || @event.guests.include?(user) %>
           <%= label_tag "user_id[]", "#{user.name}" %>
           <%= check_box_tag "user_id[]", user.id %></br>
           <% end %>

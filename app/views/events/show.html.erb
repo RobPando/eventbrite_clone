@@ -1,6 +1,9 @@
 <% provide(:title, "Event") %>
 <h1>Event Name: <%= @event.name %></h1>
 
+<%= link_to "Delete Event", @event, method: "delete", data: { confirm: "Are you sure?" } %> | 
+<%= link_to "Edit Event", edit_event_path(@event) %>
+
 <h2>Creator: <%= @event.creator.name %></h2>
 
 <h3>Desciption</h3>
@@ -10,7 +13,7 @@
 <p><%= @event.location %></p>
 
 <h3>Date</h3>
-<p><%= @event.date.strftime('%A %b %d') %></p>
+<p><%= @event.date.strftime('%A %b %d') unless @event.date.nil? %></p>
 
 <h3>Guests</h3>
 <% if @event.guests.any? %>

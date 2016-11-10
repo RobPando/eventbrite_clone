@@ -4,7 +4,6 @@ RSpec.describe "User/Event management" do
   
   before :each do
     @user = create(:user)
-    @another_user = create(:user)
     log_in(@user)
   end
 

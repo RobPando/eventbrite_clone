@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   has_many :guests, through: :invitations, source: :user
-  belongs_to :creator, class_name: "User", dependent: :destroy
+  belongs_to :creator, class_name: "User"
   has_many :invitations
   
   validates :name, presence: true

@@ -23,4 +23,7 @@ module SessionsHelper
     redirect_to root_url unless logged_in?
   end
 
+  def current_user?(user)
+    user == current_user
+  end
 end

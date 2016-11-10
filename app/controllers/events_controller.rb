@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :logged_in_user, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
     @events = Event.all
@@ -23,6 +24,7 @@ class EventsController < ApplicationController
     else
       redirect_to new_event_path
     end
+
   end
 
   def show
@@ -31,6 +33,8 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find_by(id: params[:id])
+    @event.invitations.build
+    @users = User.all
   end
   
   def update
@@ -42,6 +46,7 @@ class EventsController < ApplicationController
       flash[:success] = "Event updated!"
       redirect_to @event
     else
+      @users = User.all
       render 'edit'
     end
   end
@@ -55,5 +60,10 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :description, :location, :date)
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
   end
 end
