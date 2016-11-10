@@ -1,9 +1,18 @@
 <% if current_user.events.any? %>
-  <ul>
-    <% current_user.events.each do |invite| %>
-      <li>
-        <%= link_to "#{invites.name}", event_path(invite) %>
-      </li>
-    <% end %>
-  </ul>
+  <h3>Upcoming events</h3>
+    <ul>
+      <% current_user.events.upcoming_events.each do |invite| %>
+        <li>
+          <%= link_to "#{invite.name}", event_path(invite) %>
+        </li>
+      <% end %>
+    </ul>
+  <h3>Past events</h3>
+    <ul>
+      <% current_user.events.past_events.each do |invite| %>
+        <li>
+          <%= link_to "#{invite.name}", event_path(invite) %>
+        </li>
+      <% end %>
+    </ul>
 <% end %>
