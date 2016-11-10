@@ -17,7 +17,7 @@ RSpec.describe "User/Event management" do
     post events_path, params: { event: { name: "Some", 
                                          description: "Party",
                                          location: "bumble",
-                                         guest: '1'}}
+                                         date: Time.zone.now}}
     expect(response).to redirect_to(event_path(1))
   end
 
@@ -31,7 +31,8 @@ RSpec.describe "User/Event management" do
   it "submits the right information" do
     post events_path, params: { event: { name: "party",
                                          description: "asd",
-                                         location: "ma house" } }
+                                         location: "ma house",
+                                         date: Time.zone.now } }
     expect(response).to redirect_to(event_path(1))
   end
 
@@ -54,6 +55,7 @@ RSpec.feature "Create Event", type: :feature do
     fill_in "Name", with: "Bday"
     fill_in "Description", with: "ma bday"
     fill_in "Location", with: "ma house"
+    fill_in "Date", with: Time.zone.now
     check "#{@another_user.name}"
     click_button "Create Event"
 
@@ -66,6 +68,7 @@ RSpec.feature "Create Event", type: :feature do
     fill_in "Name", with: "Bday"
     fill_in "Description", with: "ma bday"
     fill_in "Location", with: "ma house"
+    fill_in "Date", with: Time.zone.now
     check "#{@another_user.name}"
     click_button "Create Event"
 

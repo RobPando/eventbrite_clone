@@ -30,10 +30,25 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event = Event.find_by(id: params[:id])
   end
+  
   def update
+    @event = Event.find_by(id: params[:id])
+    if @event.update_attributes(event_params)
+      unless params[:user_id].nil?
+        params[:user_id].each { |id| @event.invitations.create(user_id: id) }
+      end
+      flash[:success] = "Event updated!"
+      redirect_to @event
+    else
+      render 'edit'
+    end
   end
   def destroy
+    Event.find(params[:id]).destroy
+    flash[:success] = "Event successfully deleted."
+    redirect_to current_user
   end
 
   private

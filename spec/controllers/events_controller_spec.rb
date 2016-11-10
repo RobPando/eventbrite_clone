@@ -7,11 +7,15 @@ RSpec.describe EventsController do
     expect(response).to have_http_status(:success)
   end
 
-  it "is invalid if name is blank"
-  it "is invalid if description is blank"
-  it "is invalid if location is blank"
-  it "it invalid if date is blank"
+  context "Edit and updating" do
+    it "goes to edit page"
+    it "updates event with valid information"
+    it "renders edit if information is invalid"
+    it "does not let another user edit another event"
+  end
 
-  context "date format" do
+  context "Deleting event" do
+    it "deletes and event"
+    it "does not let other user delete another event"
   end
 end

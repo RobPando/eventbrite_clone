@@ -2,12 +2,16 @@
 <h1>Event Name: <%= @event.name %></h1>
 
 <h2>Creator: <%= @event.creator.name %></h2>
+
 <h3>Desciption</h3>
 <p><%= @event.description %></p>
+
 <h3>Location</h3>
 <p><%= @event.location %></p>
+
 <h3>Date</h3>
 <p><%= @event.date.strftime('%A %b %d') %></p>
+
 <h3>Guests</h3>
 <% if @event.guests.any? %>
   <ul>
