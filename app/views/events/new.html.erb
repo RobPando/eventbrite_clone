@@ -5,18 +5,19 @@
     <%= form_for(@event) do |f| %>
       <%= submit_tag "Create Event" %></br>
 
-      <%= f.label :name %>
+      <%= f.label :name %></br>
       <%= f.text_field :name %></br>
 
-      <%= f.label :description %>
+      <%= f.label :description %></br>
       <%= f.text_field :description %></br>
 
-      <%= f.label :location %>
+      <%= f.label :location %></br>
       <%= f.text_field :location %></br>
       
-      <%= f.label :date %>
-      <%= f.date_field :date %></br>
+      <%= f.label :date %></br>
+      <%= f.text_field :date, class: "datepicker" %></br>
 
+      <h2>Invite:</h2>
       <%= f.fields_for(:invitations) do |invite| %>
         <% @users.each do |user| %>
           <% unless current_user == user %>
@@ -27,3 +28,16 @@
       <% end %>
     <% end %>
 </p>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+    maxViewMode: 2,
+    todayBtn: "linked",
+    clearBtn: true,
+    autoclose: true,
+    toggleActive: true,
+    defaultViewDate: { year: 2016, month: 11, day: 11 }
+});
+  });
+</script>
