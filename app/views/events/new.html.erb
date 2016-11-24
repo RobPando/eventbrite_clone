@@ -21,14 +21,17 @@
       <%= f.date_field :date, class: "datepicker" %></br>
 
       <h2>Invite:</h2>
-      <%= f.fields_for(:invitations) do %>
         <% @users.each do |user| %>
           <% unless current_user == user %>
-          <%= check_box_tag "user_id[]", user.id, id: 'indeterminate-checkbox' %></br>
-          <%= label_tag "user_id[]", "#{user.name}" %>
+            <div class="switch">
+              <label><h6>
+                Off
+              <%= check_box_tag "user_id[]", user.id %>
+              <span class="lever"></span>
+                <%= user.name %></h6>
+              </label>
+            </div>
           <% end %>
         <% end %>
-      
-      <% end %>
     <% end %>
 </p>

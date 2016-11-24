@@ -1,28 +1,40 @@
 <% provide(:title, "Event") %>
-<h1>Event Name: <%= @event.name %></h1>
-<% if logged_in? && current_user == @event.creator %>
-  <%= link_to "Delete Event", @event, method: "delete", data: { confirm: "Are you sure?" } %> | 
-  <%= link_to "Edit Event", edit_event_path(@event) %>
-<% end %>
 
-<h2>Creator: <%= @event.creator.name %></h2>
+<div class="row">
+  <div class="col s12">
+    <h1>Event Name: <%= @event.name %></h1>
+    <% if logged_in? && current_user == @event.creator %>
+        <%= link_to "Delete Event", @event, method: "delete", data: { confirm: "Are you sure?" } %> | 
+        <%= link_to "Edit Event", edit_event_path(@event) %>
+      <% end %>
+      <h5>Creator: <%= @event.creator.name %></h5>
+  </div>
+</div>
 
-<h3>Desciption</h3>
-<p><%= @event.description %></p>
+  <div class="col s12 card-panel blue lighten-1">
+    <h5>Desciption</h5>
+    <p><%= @event.description %></p>
+  </div>
 
-<h3>Location</h3>
-<p><%= @event.location %></p>
+  <div class="col s12 card-panel blue lighten-3">
+    <h5>Location</h5>
+    <p><%= @event.location %></p>
+  </div>
+  
+  <div class="col s12 card-panel blue lighten-1">
+    <h5>Date</h5>
+    <p><%= @event.date.strftime('%A %b %d, %Y') unless @event.date.nil? %></p>
+  </div>
 
-<h3>Date</h3>
-<p><%= @event.date.strftime('%A %b %d, %Y') unless @event.date.nil? %></p>
-
-<h3>Guests</h3>
-<% if @event.guests.any? %>
-  <ul>
-    <% @event.guests.each do |guest| %>
-    <li><%= guest.name %></li>
+  <div class="col 12 card-panel blue lighten-3">
+    <h5>Guests</h5>
+    <% if @event.guests.any? %>
+    <ul>
+      <% @event.guests.each do |guest| %>
+      <li><%= guest.name %></li>
+      <% end %>
+    </ul>
+    <% else %>
+      <p>No guests</p>
     <% end %>
-  </ul>
-<% else %>
-  <p>No guests</p>
-<% end %>
+  </div>
