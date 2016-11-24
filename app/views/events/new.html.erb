@@ -6,7 +6,7 @@
 
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.submit "Create Event" %></br>
+      <%= f.submit "Create Event", class: 'btn' %></br>
 
       <%= f.label :name %></br>
       <%= f.text_field :name %></br>
@@ -21,26 +21,14 @@
       <%= f.date_field :date, class: "datepicker" %></br>
 
       <h2>Invite:</h2>
-      <%= f.fields_for(:invitations) do |invite| %>
+      <%= f.fields_for(:invitations) do %>
         <% @users.each do |user| %>
           <% unless current_user == user %>
+          <%= check_box_tag "user_id[]", user.id, id: 'indeterminate-checkbox' %></br>
           <%= label_tag "user_id[]", "#{user.name}" %>
-          <%= check_box_tag "user_id[]", user.id %></br>
           <% end %>
         <% end %>
+      
       <% end %>
     <% end %>
 </p>
-
-<script type="text/javascript">
-      $(document).ready(function(){
-      $('.datepicker').datepicker({
-        maxViewMode: 2,
-        todayBtn: "linked",
-        clearBtn: true,
-        autoclose: true,
-        toggleActive: true,
-        defaultViewDate: { year: 2016, month: 11, day: 11 }
-        });
-      });
-</script>

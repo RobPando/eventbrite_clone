@@ -1,18 +1,14 @@
 <% if current_user.events.any? %>
-  <h3>Upcoming events</h3>
-    <ul>
+    <ul class="collection with-header">
+      <li class="collection-header center"><h5>Past events</h5></li>
       <% current_user.events.upcoming_events.each do |invite| %>
-        <li>
-          <%= link_to "#{invite.name}", event_path(invite) %>
-        </li>
+        <li class="collection-item"><%= link_to "#{invite.name}", event_path(invite) %></li>
       <% end %>
     </ul>
-  <h3>Past events</h3>
-    <ul>
+    <ul class="collection with-header">
+      <li class="collection-header center"><h5>Past events</h5></li>
       <% current_user.events.past_events.each do |invite| %>
-        <li>
-          <%= link_to "#{invite.name}", event_path(invite) %>
-        </li>
+        <li class="collection-item"><%= link_to "#{invite.name}", event_path(invite) %></li>
       <% end %>
     </ul>
 <% end %>

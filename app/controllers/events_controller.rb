@@ -1,58 +1,55 @@
 class EventsController < ApplicationController
   before_action :logged_in_user, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :find_event, only: [:show, :edit, :update]
 
   def index
-    @upcoming_events = Event.all.upcoming_events
-    @past_events = Event.all.past_events
+    find_upcoming_events
+    find_past_events
   end
 
   def new
     @event = Event.new
     @event.invitations.build
-    @users = User.all
+    load_users
   end
 
   def create
     @event = current_user.created_events.build(event_params)
     if @event.save
-      @invites = Event.find(@event.id)
-      unless params[:user_id].nil?
-        params[:user_id].each { |id| @invites.invitations.create(user_id: id) }
-      end
+      create_invitations unless params[:user_id].nil?
       redirect_to @event
-      flash[:success] = "Event was created successfully"
+      flash[:success] = 'Event created successfully'
     else
       redirect_to new_event_path
     end
   end
 
   def show
-    @event = Event.find_by(id: params[:id])
+    find_event
   end
 
   def edit
-    @event = Event.find_by(id: params[:id])
+    find_event
     @event.invitations.build
-    @users = User.all
+    load_users
   end
-  
+
   def update
-    @event = Event.find_by(id: params[:id])
+    find_event
     if @event.update_attributes(event_params)
-      unless params[:user_id].nil?
-        params[:user_id].each { |id| @event.invitations.create(user_id: id) }
-      end
-      flash[:success] = "Event updated!"
+      create_invitations unless params[:user_id].nil?
+      flash[:success] = 'Event updated!'
       redirect_to @event
     else
-      @users = User.all
+      load_users
       render 'edit'
     end
   end
+
   def destroy
     Event.find(params[:id]).destroy
-    flash[:success] = "Event successfully deleted."
+    flash[:success] = 'Event successfully deleted.'
     redirect_to current_user
   end
 
@@ -65,5 +62,29 @@ class EventsController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
+  end
+
+  def find_event
+    @event = Event.find_by(id: params[:id])
+  end
+
+  def find_upcoming_events
+    @upcoming_events = load_events.upcoming_events
+  end
+
+  def find_past_events
+    @past_events = load_events.past_events
+  end
+
+  def load_events
+    Event.all
+  end
+
+  def load_users
+    @users = User.all
+  end
+
+  def create_invitations
+    params[:user_id].each { |id| @event.invitations.create(user_id: id) }
   end
 end

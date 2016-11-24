@@ -1,13 +1,13 @@
 <% provide(:title, "Events") %>
 
-<h1>All the Events</h1>
+<h1 class="center">All the Events</h1>
 
 <ul class="collection with-header">
   <li class="collection-header center"><h4>Upcoming Events</h4></li>
   <% if @upcoming_events.any? %>
     <% @upcoming_events.each do |upcoming_event| %>
   <li class="collection-item">
-    <div><h6><%= upcoming_event.name %></h6><%= link_to content_tag(:i, "visibility", class: 'material-icons'), event_path(upcoming_event), class: 'secondary-content' %></div>
+    <div><h5><%= upcoming_event.name %><%= link_to content_tag(:i, "visibility", class: 'material-icons'), event_path(upcoming_event), class: 'secondary-content' %></h5></div>
   </li>
     <% end %>
   <% else %>
