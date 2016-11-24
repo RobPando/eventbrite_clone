@@ -1,24 +1,19 @@
-# README
+# Private Event Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Web app similar to Eventbrite, where a user can:
 
-Things you may want to cover:
+* Sign up | sign in
 
-* Ruby version
+* Create an Event (title, description, location, date)
 
-* System dependencies
+* User can invite other users to the event
 
-* Configuration
+* User can view, edit and delete their created events
 
-* Database creation
+* User can see what events he/she got invited to
 
-* Database initialization
+* User can see who is invited to the events along with all the information
 
-* How to run the test suite
+* User can view their upcoming events as well as their past events.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Project done as part of the course by [The Odin Project](http://www.theodinproject.com)
