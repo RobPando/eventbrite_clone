@@ -3,7 +3,8 @@ class EventsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @events = Event.all
+    @upcoming_events = Event.all.upcoming_events
+    @past_events = Event.all.past_events
   end
 
   def new
@@ -24,7 +25,6 @@ class EventsController < ApplicationController
     else
       redirect_to new_event_path
     end
-
   end
 
   def show

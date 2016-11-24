@@ -1,5 +1,6 @@
 <% provide(:title, "Sign up") %>
-<center>
+<div class="row">
+  <div class="col s6">
   <h1>Sign up</h1>
   <p>
   <%= form_for(@user) do |f| %>
@@ -16,7 +17,8 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %></br> 
 
-    <%= f.submit "Register" %>
+    <%= f.submit "Register", class: "btn" %>
   <% end %>
   </p>
-</center>
+  </div>
+</div>
