@@ -1,7 +1,7 @@
+# Events
 class EventsController < ApplicationController
   before_action :logged_in_user, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
-  before_action :find_event, only: [:show, :edit, :update]
 
   def index
     find_upcoming_events
@@ -9,9 +9,9 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    build_event
     @event.invitations.build
-    load_users
+    find_users
   end
 
   def create
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   def edit
     find_event
     @event.invitations.build
-    load_users
+    find_users
   end
 
   def update
@@ -48,7 +48,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    Event.find(params[:id]).destroy
+    @event.destroy
     flash[:success] = 'Event successfully deleted.'
     redirect_to current_user
   end
@@ -56,35 +56,40 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :description, :location, :date)
-  end
-
-  def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+    params.fetch(:event, {}).permit(:name, :description, :location, :date)
   end
 
   def find_event
-    @event = Event.find_by(id: params[:id])
+    @event ||= events_scope.find(params[:id])
   end
 
   def find_upcoming_events
-    @upcoming_events = load_events.upcoming_events
+    @upcoming_events = events_scope.upcoming_events
   end
 
   def find_past_events
-    @past_events = load_events.past_events
+    @past_events = events_scope.past_events
   end
 
-  def load_events
+  def build_event
+    @event ||= events_scope.build
+  end
+
+  def find_users
+    @users ||= User.all
+  end
+
+  def events_scope
     Event.all
-  end
-
-  def load_users
-    @users = User.all
   end
 
   def create_invitations
     params[:user_id].each { |id| @event.invitations.create(user_id: id) }
+  end
+
+  def correct_user
+    find_event
+    @user = @event.creator
+    redirect_to(root_url) unless current_user?(@user)
   end
 end

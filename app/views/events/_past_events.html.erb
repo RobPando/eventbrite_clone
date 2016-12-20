@@ -1,0 +1,5 @@
+<% @past_events.each do |past_event| %>
+  <li class="collection-item">
+    <div><h5><%= past_event.name %><%= link_to content_tag(:i, "visibility", class: 'material-icons'), event_path(past_event), class: 'secondary-content' %></h5></div>
+  </li>
+<% end %>

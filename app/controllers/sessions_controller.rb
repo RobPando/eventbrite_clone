@@ -1,5 +1,5 @@
+# Login/logout
 class SessionsController < ApplicationController
-
   def new
     redirect_to current_user if logged_in?
   end
@@ -8,10 +8,10 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:session][:email])
     if @user && @user.authenticate(params[:session][:password])
       log_in @user
-      flash[:success] = "You have successfully logged in!"
+      flash[:success] = 'You have successfully logged in!'
       redirect_to @user
     else
-      render 'new'
+      render :new
     end
   end
 

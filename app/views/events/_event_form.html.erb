@@ -1,0 +1,21 @@
+<%= form_for(@event) do |f| %>
+
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.submit yield(:button), class: 'btn' %></br>
+
+  <%= f.label :name %></br>
+  <%= f.text_field :name %></br>
+
+  <%= f.label :description %></br>
+  <%= f.text_field :description %></br>
+
+  <%= f.label :location %></br>
+  <%= f.text_field :location %></br>
+  
+  <%= f.label :date %></br>
+  <%= f.date_field :date, class: "datepicker" %></br>
+
+  <h2>Invite:</h2>
+    <%= render 'invite_form' %>
+<% end %>

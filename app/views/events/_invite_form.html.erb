@@ -1,0 +1,13 @@
+<% @users.each do |user| %>
+  <% unless current_user == user || @event.guests.include?(user) %>
+    <div class="switch">
+      <label><h6>
+        Off
+      <%= check_box_tag "user_id[]", user.id %>
+      <span class="lever"></span>
+        <%= user.name %></h6>
+      </label>
+    </div>
+  <% end %>
+<% end %>
+

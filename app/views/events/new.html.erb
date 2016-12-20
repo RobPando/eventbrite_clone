@@ -1,37 +1,7 @@
 <% provide(:title, "New Event") %>
+<%= provide(:button, 'Create Event') %>
 
 <h1>Create a New Event</h1>
-<p> 
-    <%= form_for(@event) do |f| %>
-
-      <%= render 'shared/error_messages', object: f.object %>
-
-      <%= f.submit "Create Event", class: 'btn' %></br>
-
-      <%= f.label :name %></br>
-      <%= f.text_field :name %></br>
-
-      <%= f.label :description %></br>
-      <%= f.text_field :description %></br>
-
-      <%= f.label :location %></br>
-      <%= f.text_field :location %></br>
-      
-      <%= f.label :date %></br>
-      <%= f.date_field :date, class: "datepicker" %></br>
-
-      <h2>Invite:</h2>
-        <% @users.each do |user| %>
-          <% unless current_user == user %>
-            <div class="switch">
-              <label><h6>
-                Off
-              <%= check_box_tag "user_id[]", user.id %>
-              <span class="lever"></span>
-                <%= user.name %></h6>
-              </label>
-            </div>
-          <% end %>
-        <% end %>
-    <% end %>
-</p>
+<div> 
+  <%= render 'event_form' %>
+</div>
