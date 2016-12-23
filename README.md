@@ -16,4 +16,37 @@ A Web app similar to Eventbrite, where a user can:
 
 * User can view their upcoming events as well as their past events.
 
+### Dependencies
+* Ruby '2.3.1'
+* Rails '5.0.0.1'
+
+### Get Started
+Install gems
+
+```
+$ bundle install
+```
+
+Migrate db
+
+```
+$ rails db:migrate
+```
+
+Run server
+
+```
+$ rails s
+```
+go to `localhost:3000`
+
+### OR
+
+View live [here on Heroku](https://serene-dusk-43888.herokuapp.com)
+
+
+
+
+
+
 Project done as part of the course by [The Odin Project](http://www.theodinproject.com)
