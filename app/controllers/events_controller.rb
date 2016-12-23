@@ -21,7 +21,8 @@ class EventsController < ApplicationController
       redirect_to @event
       flash[:success] = 'Event created successfully'
     else
-      redirect_to new_event_path
+      find_users
+      render :new
     end
   end
 
@@ -42,8 +43,8 @@ class EventsController < ApplicationController
       flash[:success] = 'Event updated!'
       redirect_to @event
     else
-      load_users
-      render 'edit'
+      find_users
+      render :edit
     end
   end
 

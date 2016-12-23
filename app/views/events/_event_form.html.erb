@@ -14,8 +14,9 @@
   <%= f.text_field :location %></br>
   
   <%= f.label :date %></br>
-  <%= f.date_field :date, class: "datepicker" %></br>
-
+  <div class="datepicker">
+    <%= f.date_field :date, class: "datepicker" %></br>
+  </div>
   <h2>Invite:</h2>
     <%= render 'invite_form' %>
 <% end %>
